@@ -3,8 +3,6 @@ const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-
-
 // middleware
 const { isAuthenticated } = require("../middlewares/jwt.middleware");
 
