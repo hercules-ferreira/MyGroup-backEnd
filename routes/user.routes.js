@@ -33,26 +33,28 @@ router.post('/add-like/:likeId', isAuthenticated, async (req, res, next) => {
   }
 });
 
-router.get('/profile', async (req, res, next) => {
+
+router.get("/profile", async (req, res, next) => {
   const userId = req.payload._id;
   try {
     const userFromDB = await User.findById(userId, { passwordHash: 0 });
     res.json(userFromDB);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
-
+});
 
 // listar usuário com as informações dos likes
-router.get('/:userId', async (req, res, next) => {
+router.get("/:userId", async (req, res, next) => {
   const { userId } = req.params;
   try {
     const userFromDB = await User.findById(userId, {
-      createdAt: 0, updatedAt: 0, __v: 0
+      createdAt: 0,
+      updatedAt: 0,
+      __v: 0,
     }).populate({
-      path: 'likes',
-      select: '-createdAt -updatedAt -__v'
+      path: "likes",
+      select: "-createdAt -updatedAt -__v",
     });
     res.status(200).json(userFromDB);
   } catch (error) {
@@ -60,18 +62,26 @@ router.get('/:userId', async (req, res, next) => {
   }
 });
 
-router.put('/image', uploadImage.single('profileImage'), async (req, res, next) => {
-  const userId = req.payload._id;
-  console.log(req.body)
-  try {
-    const { path } = req.file;
-    const userFromDB = await User.findByIdAndUpdate(userId, { avatarUrl: path }, { new: true });
-    const { username, avatarUrl } = userFromDB;
-    res.json({ message: 'Upload Success!', user: { username, avatarUrl }});
-  } catch (error) {
-    next(error); 
+router.put(
+  "/image/:userId",
+  uploadImage.single("profileImage"),
+  async (req, res, next) => {
+    const userId = req.params.userId;
+    // console.log(req.body)
+    try {
+      const { path } = req.file;
+      const userFromDB = await User.findByIdAndUpdate(
+        userId,
+        { avatarUrl: path },
+        { new: true }
+      );
+      const { username, avatarUrl } = userFromDB;
+      res.json({ message: "Upload Success!", user: { username, avatarUrl } });
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 
 // crUd -> Update
