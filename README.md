@@ -36,7 +36,7 @@
 
 📌 [Como usar o Site](https://github.com/ai/size-limit#readme) - O Site não precisa de recursos extras, apenas clique no link e já terá acesso a todas funcionalidades.
 
-📌 [Acessando o Site](https://github.com/ai/size-limit#readme) - Nosso Site pode ser acessado diretamente pelo link: https://adote-new-pet.netlify.app/
+📌 [Acessando o Site](https://github.com/ai/size-limit#readme) - Nosso Site pode ser acessado diretamente pelo link.
 
 
 <h1><span style="color:blue">
